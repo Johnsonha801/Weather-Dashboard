@@ -3,7 +3,7 @@ var searchBtnEl = document.querySelector("#city-search-btn");
 var searchHistoryContainerEl = document.querySelector("#search-history");
 var currentDayCardBodyEl = document.querySelector("#current-day-card-body");
 var fiveDayContainerEl = document.querySelector("#five-day-forcast-container");
-var openWeatherIconUrl = "http://maps.openweathermap.org/img/wn/"; 
+var openWeatherIconUrl = "http://openweathermap.org/img/wn/"; 
 
 // Load search history items from localStorage and parse back to object
 var searchHistory = JSON.parse(localStorage.getItem("weatherSearchHistory")) || [];
@@ -54,7 +54,7 @@ var callWeatherAPI = function(city) {
     var cityName, country = "";
     
     // Compile URL
-    var apiUrl = "https://maps.openweathermap.org/data/2.0/weather?q=" + adjustedCity + 
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + adjustedCity + 
     "&appid=7d91cb47b0d97098ab52d6b453de6940";
     
     // Fetch first url api endpoint
@@ -65,7 +65,7 @@ var callWeatherAPI = function(city) {
             return response.json();
         } else {
             // Response returned with code in 400s. Display Error Message
-            currentDayCardBodyEl.innerHTML = "<h4>Something went wrong. Please try again.</h4>";
+            currentDayCardBodyEl.innerHTML = "<h4>Something went wrong. Please try again. test</h4>";
             fiveDayContainerEl.innerHTML = "";
             console.log("error");
             return;
@@ -79,7 +79,7 @@ var callWeatherAPI = function(city) {
         country = response.sys.country;
         
         // Compile new url to use in fetching data from another endpoint
-        var newUrl = "https://maps.openweathermap.org/data/2.0/onecall?units=imperial&lat=" 
+        var newUrl = "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" 
             + lat + "&lon=" 
             + lon 
             + "&exclude=minutely,hourly&appid=7d91cb47b0d97098ab52d6b453de6940";
